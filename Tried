@@ -1,0 +1,31 @@
+import java.util.*;
+public class dejaVu{
+    public static void main(String args[]){
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        for(int i = 0; i < t; i++){
+            String s = sc.next();
+            if(palin('a'+s)==0)
+                System.out.println("YES\n"+"a"+s);
+            else if(palin(s+'a')==0)
+                System.out.println("YES\n"+s+"a");
+            else
+                System.out.println("NO\n");
+        }
+    }      
+    static int palin(String s){
+       for(int i = 0; i <= s.length()/2; i++){
+           if(s.charAt(i) != s.charAt(s.length()-i-1))
+               return 0;
+       }
+        return 1;
+   }
+}
+
+If s is the character 'a' repeated some number of times, there is no solution. Otherwise, I claim either 'a' + s or s + 'a' is a solution (or both).
+
+Let's prove it. Assume for contradiction that 'a' + s and s + 'a' are both palindromes. Then the first and last characters of s are 'a'. 
+Then the second and second to last characters of s are 'a'. Repeating this, we see that all characters of s are 'a', but we assumed we are not in this case. 
+Therefore, the claim is true.
+
+The solution is simply to check if 'a' + s and s + 'a' are palindromes and output the correct one. Complexity is O(n).
